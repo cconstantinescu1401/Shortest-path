@@ -1,0 +1,80 @@
+Constantinescu Ciprian - 321CB
+
+In cadrul implementarii programului, am inceput prin crearea clasei parinte Vehicle, care
+contine variabilele membru:
+	- private int size
+	- private int cost
+	- private String type
+De asemenea, am decis ca clasa Vehicle sa fie de tip abstract, avand metoda abstracta
+public abstract char getSymbol() .
+Apoi, am implementat clasele Bicycle, Motorcycle, Car si Truck, clase ce extind(mostenesc)
+clasa abstracta Vehicle. In cadrul constructorilor acestora, am apelat metoda super(), avand
+ca parametri datele prezentate in enunt. De asemenea, aceste clase suprascriu metoda 
+clasei parinte getSymbol(), astfel ca fiecare dintre ele va returna caracterul care reprezinta
+simbolul acelei clase.
+
+In continuare, am implementat clasa Restriction, avand ca variabile membru doar tipul si costul
+ambuteiajului. Am decis sa nu creez trei clase diferite care ar extinde aceasta clasa(Blocaj,
+Accident, Trafic), intrucat acestea nu ar avea decat variabila membru cost, si nu ar avea
+functionalitati diferite.
+
+Apoi, am creat clasa Street, cu variabile membru potrivite, in cadrul careia, pe langa 
+constructor si cativa getteri, sunt implementate doua metode:
+		- public void newRestriction(restrictionType, restrictionCost)
+						 - functie care adauga in vectorul de ambuteiaje al strazii un nou ambuteiaj,
+						   crescand astfel si numarul de ambuteiaje al acelei strazi;
+						 - am folosit aceasta functie in special atunci cand a fost citita, din fisierul
+						   de intrare, o comanda ce sugereaza adaugarea unui ambuteiaj de tip
+						   accident, trafic sau blocaj;
+		- public int trafficCost(vehicle_cost)
+						- functie care calculeaza costul total de circulatie al strazii, fiind dat costul
+						  unui vehicul;
+						  
+Am decis sa implementez propria coada de prioritate, folosind o lista.
+Astfel, am creat clasa Node, care reprezinta un nod din cadrul listei, si care are ca variabila 
+membru un alt Node, ce reprezinta urmatorul nod din cadrul listei. De asemenea, in cadrul 
+clasei Node, am decis ca, pe langa variabilele index(index-ul nodului in cadrul hartii), 
+value(ce va retine costul de parcurgere pana la acel nod) si next, sa folosesc variabila path, 
+pentru a retine in aceasta, mai apoi, drumul parcurs pana la acel nod. 
+Am creat clasa PriorityQueue, ce are, ca variabila membru, o lista de noduri, si am implementat
+metoda add(care adauga un element in coada de prioritate), metoda remove(care extrage primul
+element din coada de prioritate) si metoda isEmpty(care verifica daca coada este goala sau nu).
+
+Pentru implementarea algoritmului Dijkstra, am creat clasa DijkstraPriorityQ. Am decis ca
+variabilele membru ale clasei sa fie:
+		- vectorul costs, ce va contine costurile totale de parcurgere pana la fiecare nod;
+		- vectorul settled, ce va indica, pentru fiecare nod, daca acesta a fost pus la punct,
+		  adica daca a fost deja stabilit costul minim de parcurgere pana la acel nod;
+		- coada de prioritate pq, necesara pentru implementarea algoritmului;
+		- harta m, asupra careia va fi aplicat algoritmul;
+		- un vehicul v, al carui tip depinde de comenzile ce urmeaza a fi citite din fisier.
+Am folosit metoda auxiliara processStreets, care primeste un nod sursa, verifica daca strazile
+care pornesc de la nodul sursa respecta conditiile, si, in caz afirmativ, adauga acele strazi in
+coada de prioritate.
+Algoritmul propriu-zis este implementat in cadrul metodei dijkstra, care primeste index-ul
+nodului sursa si index-ul nodului destinatie si va returna nodul destinatie avand costul minim
+si path-ul corespunzator, sau null, daca nodul destinatie nu a putut fi atins.
+		
+
+Clasa Map, care reprezinta harta, are ca variabile membru un vector de strazi,
+numarul de strazi si numarul de noduri. In cadrul acesteia, am implementat functia readMap, 
+care, folosind un Scanner primit ca parametru, citeste informatiile despre harta,
+construind altfel harta sugerata in fisier. De asemenea, am implementat functia runCommands,
+care, avand ca parametri un Scanner si un BufferedWriter, citeste comenzile din fisierul de 
+intrare si le executa.
+Tot in cadrul clasei Map, am implementat metodele cerute:
+		- addStreet(start, end, cost, size)
+		- addRestriction(type, start, end, cost)
+		- drive(vehicle, start, end)
+De asemenea, am creat metodele auxiliare createVehicle(care creeaza un anumit vehicul, in
+functie de simbolul dat) si findStreet(care cauta, in cadrul vectorului de strazi, strada avand ca
+index-uri start si end pe cele date ca parametri, si returneaza acea strada, daca a fost gasita,
+sau null, daca nu a fost gasita).
+
+
+
+Astfel, in cadrul proiectului,  am folosit conceptele de mostenire(relatiile de tip "is-a": 
+the Bicycle is a Vehicle, the Car is a Vehicle), abstractizare(clasa abstracta Vehicle) si 
+polimorfism(ex: am suprascris metoda getSymbol in cadrul claselor Bicycle, Car, Truck,
+Motorcycle).				   
+																			  
