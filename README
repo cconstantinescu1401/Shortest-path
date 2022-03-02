@@ -1,5 +1,3 @@
-Constantinescu Ciprian - 321CB
-
 In cadrul implementarii programului, am inceput prin crearea clasei parinte Vehicle, care
 contine variabilele membru:
 	- private int size
